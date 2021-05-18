@@ -15,15 +15,20 @@
     can depend on to use JCIFS.
   </description>
   <dependencies>
-    <dependency>
+<!--    <dependency>
       <groupId>eu.agno3.jcifs</groupId>
       <artifactId>jcifs-ng</artifactId>
       <version>${jcifsVersion}</version>
-    </dependency>
-    <dependency>
+    </dependency>-->
+    <!--    <dependency>
       <groupId>org.bouncycastle</groupId>
       <artifactId>bcprov-jdk15on</artifactId>
       <version>${bouncyCastleVersion}</version>
+    </dependency>-->
+    <dependency>
+      <groupId>org.opennms.dependencies</groupId>
+      <artifactId>org.opennms.dependencies.jcifs-shaded</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
   <repositories>
