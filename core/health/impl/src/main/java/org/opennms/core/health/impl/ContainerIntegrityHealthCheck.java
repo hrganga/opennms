@@ -136,6 +136,11 @@ public class ContainerIntegrityHealthCheck implements HealthCheck {
         return health.getWorst().orElse(new Response(Status.Success));
     }
 
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(HealthCheck.LOCAL, HealthCheck.BUNDLE);
+    }
+
     private List<String> parse(String bundlesToIgnore) {
         if (Strings.isNullOrEmpty(bundlesToIgnore)) {
             return Collections.emptyList();

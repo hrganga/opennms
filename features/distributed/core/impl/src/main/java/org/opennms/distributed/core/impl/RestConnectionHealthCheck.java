@@ -28,6 +28,9 @@
 
 package org.opennms.distributed.core.impl;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.opennms.core.health.api.Context;
 import org.opennms.distributed.core.api.RestClient;
 import org.opennms.core.health.api.HealthCheck;
@@ -51,6 +54,11 @@ public class RestConnectionHealthCheck implements HealthCheck {
     public Response perform(Context context) throws Exception {
         restClient.ping();
         return new Response(Status.Success);
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(HealthCheck.MINION, HealthCheck.REST);
     }
 
     @Override

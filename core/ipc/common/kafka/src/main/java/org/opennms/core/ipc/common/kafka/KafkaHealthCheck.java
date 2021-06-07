@@ -29,6 +29,8 @@
 package org.opennms.core.ipc.common.kafka;
 
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import org.opennms.core.health.api.Context;
@@ -65,5 +67,10 @@ public class KafkaHealthCheck implements HealthCheck {
         } catch (Exception e) {
             return new Response(e);
         }
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(BROKER);
     }
 }

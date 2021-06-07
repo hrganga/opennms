@@ -28,6 +28,8 @@
 
 package org.opennms.features.distributed.dao.healthcheck;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import org.opennms.core.health.api.Context;
@@ -70,5 +72,10 @@ public class DaoHealthCheck implements HealthCheck {
         } else {
             return new Response(Status.Failure, "No NodeDao available");
         }
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(HealthCheck.LOCAL, HealthCheck.DAO);
     }
 }

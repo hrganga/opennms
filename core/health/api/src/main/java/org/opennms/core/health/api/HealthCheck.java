@@ -28,6 +28,8 @@
 
 package org.opennms.core.health.api;
 
+import java.util.List;
+
 /**
  * Interface to define a {@link HealthCheck}.
  *
@@ -36,6 +38,14 @@ package org.opennms.core.health.api;
  */
 public interface HealthCheck {
 
+    String BROKER = "broker";
+    String LOCAL = "local";
+    String TELEMETRY = "telemetry";
+    String DAO = "dao";
+    String MINION = "minion";
+    String REST  = "rest";
+    String ELASTIC = "elastic";
+    String BUNDLE = "bundle";
     /**
      * The description of the {@link HealthCheck}, e.g. "Connecting to OpenNMS ReST API".
      * This is used when visualizing the progress or result of the checks.
@@ -61,4 +71,6 @@ public interface HealthCheck {
      * @param context
      */
     Response perform(Context context) throws Exception;
+
+    List<String> getTags();
 }

@@ -28,6 +28,10 @@
 
 package org.opennms.netmgt.telemetry.distributed.minion;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.opennms.core.health.api.HealthCheck;
 import org.opennms.core.health.api.SimpleHealthCheck;
 import org.opennms.netmgt.telemetry.config.api.ListenerDefinition;
 
@@ -35,6 +39,11 @@ public class ListenerHealthCheck extends SimpleHealthCheck {
 
     public ListenerHealthCheck(ListenerDefinition listenerDefinition) {
         super(() -> "Verifying Listener " + listenerDefinition.getName() + " (" + listenerDefinition.getClassName() + ")");
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(HealthCheck.LOCAL, HealthCheck.TELEMETRY);
     }
 }
 

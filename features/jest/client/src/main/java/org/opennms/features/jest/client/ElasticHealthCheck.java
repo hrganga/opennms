@@ -28,6 +28,8 @@
 package org.opennms.features.jest.client;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import org.opennms.core.health.api.Context;
@@ -79,5 +81,10 @@ public class ElasticHealthCheck implements HealthCheck {
         } catch (IOException e) {
             return new Response(e);
         }
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(HealthCheck.ELASTIC);
     }
 }

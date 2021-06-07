@@ -28,6 +28,9 @@
 
 package org.opennms.features.apilayer.health;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.opennms.features.apilayer.utils.InterfaceMapper;
 import org.opennms.integration.api.v1.health.HealthCheck;
 import org.opennms.integration.api.v1.health.Response;
@@ -58,6 +61,11 @@ public class HealthCheckManager extends InterfaceMapper<HealthCheck, org.opennms
                     }
                 });
                 return toResponse(response);
+            }
+
+            @Override
+            public List<String> getTags() {
+                return Arrays.asList(LOCAL);
             }
         };
     }

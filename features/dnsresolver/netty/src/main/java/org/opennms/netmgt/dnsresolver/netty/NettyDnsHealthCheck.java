@@ -29,6 +29,8 @@
 package org.opennms.netmgt.dnsresolver.netty;
 
 import java.net.InetAddress;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -80,5 +82,10 @@ public class NettyDnsHealthCheck implements HealthCheck {
 
         return new Response(Status.Success, String.format("%s is at %s (cache %d/%d)", hostnameToLookup, addr.get().getHostAddress(),
                 dnsResolver.getCache().getSize(), dnsResolver.getMaxCacheSize()));
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(HealthCheck.LOCAL);
     }
 }

@@ -28,6 +28,8 @@
 
 package org.opennms.distributed.jms.impl;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import javax.jms.Connection;
@@ -94,5 +96,10 @@ public class JmsConnectionHealthCheck implements HealthCheck {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(BROKER);
     }
 }

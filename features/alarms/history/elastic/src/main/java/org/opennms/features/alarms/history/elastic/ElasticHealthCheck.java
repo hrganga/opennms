@@ -28,6 +28,8 @@
 
 package org.opennms.features.alarms.history.elastic;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import org.opennms.core.health.api.Context;
@@ -59,5 +61,10 @@ public class ElasticHealthCheck implements HealthCheck {
         final long numAlarms = elasticAlarmHistoryRepository.getNumActiveAlarmsNow();
         // Any value is OK - a runtime exception is a failure
         return new Response(Status.Success, String.format("Found %d alarms.", numAlarms));
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(ELASTIC);
     }
 }

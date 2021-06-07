@@ -28,6 +28,9 @@
 
 package org.opennms.core.ipc.grpc.client;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.opennms.core.health.api.Context;
 import org.opennms.core.health.api.HealthCheck;
 import org.opennms.core.health.api.Response;
@@ -56,5 +59,10 @@ public class GrpcHealthCheck implements HealthCheck {
             return new Response(Status.Starting);
         }
         return new Response(Status.Failure);
+    }
+
+    @Override
+    public List<String> getTags() {
+        return Arrays.asList(HealthCheck.BROKER);
     }
 }
