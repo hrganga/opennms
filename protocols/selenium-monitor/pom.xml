@@ -11,7 +11,9 @@
   <name>OpenNMS :: Protocols :: Selenium</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <seleniumVersion>2.53.1</seleniumVersion>
+      <!-- <seleniumVersion>3.141.59</seleniumVersion> --> <!-- latest version available but doesnt work with htmlunit -->
+      <seleniumVersion>3.14.0</seleniumVersion> <!-- latest version which works with selenium-htmlunit-driver 2.52.0 -->
+      <!-- <seleniumVersion>2.53.1</seleniumVersion> --> <!-- original opennms version -->
   </properties>
   <packaging>bundle</packaging>
   <build>
@@ -88,6 +90,18 @@
     
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
+         <artifactId>selenium-api</artifactId>
+         <version>${seleniumVersion}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>commons-logging</groupId>
+               <artifactId>commons-logging</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+
+      <dependency>
+         <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-support</artifactId>
       <version>${seleniumVersion}</version>
       <exclusions>
@@ -112,14 +126,38 @@
     
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
+         <artifactId>selenium-htmlunit-driver</artifactId>
+         <version>2.52.0</version>
+         <exclusions>
+            <exclusion>
+               <groupId>commons-logging</groupId>
+               <artifactId>commons-logging</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+
+      <dependency>
+         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-firefox-driver</artifactId>
         <version>${seleniumVersion}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>commons-logging</groupId>
+               <artifactId>commons-logging</artifactId>
+            </exclusion>
+         </exclusions>
     </dependency>
     
     <dependency>
         <groupId>org.seleniumhq.selenium</groupId>
         <artifactId>selenium-chrome-driver</artifactId>
         <version>${seleniumVersion}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>commons-logging</groupId>
+               <artifactId>commons-logging</artifactId>
+            </exclusion>
+         </exclusions>
     </dependency>
 
     <dependency>
@@ -127,12 +165,6 @@
         <artifactId>phantomjsdriver</artifactId>
     </dependency>
     
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-api</artifactId>
-        <version>${seleniumVersion}</version>
-    </dependency>
-
     <dependency>
         <groupId>xerces</groupId>
         <artifactId>xercesImpl</artifactId>
