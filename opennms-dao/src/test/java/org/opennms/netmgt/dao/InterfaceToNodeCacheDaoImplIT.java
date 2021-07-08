@@ -85,7 +85,7 @@ public class InterfaceToNodeCacheDaoImplIT implements InitializingBean {
         final OnmsNode node1 = new OnmsNode(defaultLocation,"node1");
         final OnmsIpInterface iface1 = new OnmsIpInterface();
         iface1.setIpAddress(theAddress);
-        iface1.setIsSnmpPrimary(PrimaryType.PRIMARY);
+        iface1.setPrimaryType(PrimaryType.PRIMARY);
         node1.addIpInterface(iface1);
         final int nodeId1 = m_nodeDao.save(node1);
 
@@ -96,7 +96,7 @@ public class InterfaceToNodeCacheDaoImplIT implements InitializingBean {
         final OnmsNode node2 = new OnmsNode(defaultLocation,"node2");
         final OnmsIpInterface iface2 = new OnmsIpInterface();
         iface2.setIpAddress(theAddress);
-        iface2.setIsSnmpPrimary(PrimaryType.PRIMARY);
+        iface2.setPrimaryType(PrimaryType.PRIMARY);
         node2.addIpInterface(iface2);
         final int nodeId2 = m_nodeDao.save(node2);
 

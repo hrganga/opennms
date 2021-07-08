@@ -1194,12 +1194,12 @@ public class DefaultProvisionService implements ProvisionService, InitializingBe
             primaryIface = svcIface;
         } 
         else if (svcIface.getNode().getPrimaryInterface() == null) {
-            svcIface.setIsSnmpPrimary(PrimaryType.PRIMARY);
+            svcIface.setPrimaryType(PrimaryType.PRIMARY);
             m_ipInterfaceDao.saveOrUpdate(svcIface);
             m_ipInterfaceDao.flush();
             primaryIface= svcIface;
         } else {
-            svcIface.setIsSnmpPrimary(PrimaryType.SECONDARY);
+            svcIface.setPrimaryType(PrimaryType.SECONDARY);
             m_ipInterfaceDao.saveOrUpdate(svcIface);
             m_ipInterfaceDao.flush();
         }
@@ -1275,7 +1275,7 @@ public class DefaultProvisionService implements ProvisionService, InitializingBe
                 final OnmsIpInterface iface = new OnmsIpInterface(InetAddressUtils.addr(ipAddress), node);
                 iface.setIsManaged("M");
                 iface.setIpHostName(hostname);
-                iface.setIsSnmpPrimary(PrimaryType.NOT_ELIGIBLE);
+                iface.setPrimaryType(PrimaryType.NOT_ELIGIBLE);
                 iface.setIpLastCapsdPoll(now);
 
                 m_nodeDao.save(node);

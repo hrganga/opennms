@@ -116,7 +116,7 @@ public class InterfaceToNodeCacheDaoImplIT implements InitializingBean {
         node.setForeignId("10001");
         final OnmsIpInterface iface = new OnmsIpInterface(InetAddress.getByName("192.168.1.2"), node);
         iface.setIsManaged("M");
-        iface.setIsSnmpPrimary(PrimaryType.PRIMARY);
+        iface.setPrimaryType(PrimaryType.PRIMARY);
         final OnmsSnmpInterface snmpIf = new OnmsSnmpInterface(node, 1001);
         iface.setSnmpInterface(snmpIf);
         snmpIf.getIpInterfaces().add(iface);

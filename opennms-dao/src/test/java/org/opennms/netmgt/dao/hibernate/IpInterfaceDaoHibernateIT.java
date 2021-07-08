@@ -91,7 +91,7 @@ public class IpInterfaceDaoHibernateIT implements InitializingBean {
         OnmsNode n1 = m_databasePopulator.getNode1();
         OnmsIpInterface iface = new OnmsIpInterface(m_testAddress.getHostAddress(), n1);
         iface.setIsManaged("U");
-        iface.setIsSnmpPrimary(PrimaryType.SECONDARY);
+        iface.setPrimaryType(PrimaryType.SECONDARY);
         OnmsSnmpInterface snmpIf = new OnmsSnmpInterface(n1, 1001);
         iface.setSnmpInterface(snmpIf);
         snmpIf.getIpInterfaces().add(iface);

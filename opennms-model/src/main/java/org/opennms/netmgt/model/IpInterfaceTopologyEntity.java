@@ -56,7 +56,7 @@ public class IpInterfaceTopologyEntity {
                 ipInterface.getId(),
                 ipInterface.getIpAddress(),
                 ipInterface.getIsManaged(),
-                ipInterface.getIsSnmpPrimary(),
+                ipInterface.getPrimaryType(),
                 Optional.ofNullable(ipInterface.getNode()).map(OnmsNode::getId).orElse(null),
                 Optional.ofNullable(ipInterface.getSnmpInterface()).map(OnmsSnmpInterface::getId).orElse(null));
     }

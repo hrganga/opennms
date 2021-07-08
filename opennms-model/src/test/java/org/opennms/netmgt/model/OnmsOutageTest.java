@@ -176,7 +176,7 @@ public class OnmsOutageTest {
         onmsIpInterface.setIpHostName(host);
         onmsIpInterface.setIpLastCapsdPoll(new Date());
         onmsIpInterface.setIsManaged("M");
-        onmsIpInterface.setIsSnmpPrimary(PrimaryType.PRIMARY);
+        onmsIpInterface.setPrimaryType(PrimaryType.PRIMARY);
         onmsIpInterface.setNode(node);
 
         onmsSnmpInterface.getIpInterfaces().add(onmsIpInterface);

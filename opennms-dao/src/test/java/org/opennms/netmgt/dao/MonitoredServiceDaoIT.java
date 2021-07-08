@@ -98,6 +98,7 @@ public class MonitoredServiceDaoIT implements InitializingBean {
     }
 
     @Test
+    @Transactional
     public void testFindAllServices() {
         final List<OnmsMonitoredService> allSvcs = m_monitoredServiceDao.findAllServices();
         assertTrue(allSvcs.size() > 1);

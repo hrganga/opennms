@@ -214,7 +214,7 @@ public class NetworkBuilder {
         }
 
         public InterfaceBuilder setIsSnmpPrimary(final String isSnmpPrimary) {
-            m_iface.setIsSnmpPrimary(PrimaryType.get(isSnmpPrimary));
+            m_iface.setPrimaryType(PrimaryType.get(isSnmpPrimary));
             return this;
         }
 

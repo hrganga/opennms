@@ -1,8 +1,8 @@
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2006-2014 The OpenNMS Group, Inc.
- * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2006-2021 The OpenNMS Group, Inc.
+ * OpenNMS(R) is Copyright (C) 1999-2021 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
  *
@@ -291,26 +291,39 @@ public class OnmsIpInterface extends OnmsEntity implements Serializable {
     @Transient
     @XmlAttribute(name="snmpPrimary")
     public String getPrimaryString() {
-        return m_isSnmpPrimary == null? null : m_isSnmpPrimary.toString();
+        final PrimaryType type = m_isSnmpPrimary == null? PrimaryType.NOT_ELIGIBLE : m_isSnmpPrimary;
+        return type.toString();
     }
+
     /**
      * <p>setPrimaryString</p>
      *
      * @param primaryType a {@link java.lang.String} object.
      */
     public void setPrimaryString(String primaryType) {
-        m_isSnmpPrimary = new PrimaryType(primaryType.charAt(0));
+        m_isSnmpPrimary = PrimaryType.get(primaryType);
     }
-    
+
+    @Column(name="isSnmpPrimary", length=1)
+    // @Type(type="org.opennms.netmgt.model.PrimaryTypeUserType")
+    public char getIsSnmpPrimary() {
+        final PrimaryType type = m_isSnmpPrimary == null? PrimaryType.NOT_ELIGIBLE : m_isSnmpPrimary;
+        return type.getCharCode();
+    }
+
+    public void setIsSnmpPrimary(final char primary) {
+        this.m_isSnmpPrimary = PrimaryType.get(primary);
+    }
+
     /**
      * <p>getIsSnmpPrimary</p>
      *
      * @return a {@link org.opennms.netmgt.model.PrimaryType} object.
      */
-    @Column(name="isSnmpPrimary", length=1)
     @XmlTransient
-    public PrimaryType getIsSnmpPrimary() {
-        return m_isSnmpPrimary;
+    @Transient
+    public PrimaryType getPrimaryType() {
+        return m_isSnmpPrimary == null? PrimaryType.NOT_ELIGIBLE : m_isSnmpPrimary;
     }
 
     /**
@@ -318,10 +331,10 @@ public class OnmsIpInterface extends OnmsEntity implements Serializable {
      *
      * @param issnmpprimary a {@link org.opennms.netmgt.model.PrimaryType} object.
      */
-    public void setIsSnmpPrimary(PrimaryType issnmpprimary) {
+    public void setPrimaryType(PrimaryType issnmpprimary) {
         m_isSnmpPrimary = issnmpprimary;
     }
-    
+
     /**
      * <p>isPrimary</p>
      *
@@ -330,7 +343,7 @@ public class OnmsIpInterface extends OnmsEntity implements Serializable {
     @Transient
     @XmlTransient
     public boolean isPrimary(){
-        return m_isSnmpPrimary.equals(PrimaryType.PRIMARY);
+        return PrimaryType.PRIMARY.equals(m_isSnmpPrimary);
     }
 
     /**
@@ -386,9 +399,6 @@ public class OnmsIpInterface extends OnmsEntity implements Serializable {
         m_monitoredServices = ifServices;
     }
 
-    // TODO: Why are these annotations here?
-    @Transient
-    @JsonIgnore
     public void addMonitoredService(final OnmsMonitoredService svc) {
         m_monitoredServices.add(svc);
     }
@@ -542,8 +552,8 @@ public class OnmsIpInterface extends OnmsEntity implements Serializable {
             setIsManaged(scannedIface.getIsManaged());
         }
     
-        if (hasNewCollectionTypeValue(scannedIface.getIsSnmpPrimary(), getIsSnmpPrimary())) {
-            setIsSnmpPrimary(scannedIface.getIsSnmpPrimary());
+        if (hasNewCollectionTypeValue(scannedIface.getPrimaryType(), getPrimaryType())) {
+            setPrimaryType(scannedIface.getPrimaryType());
         }
     
         if (hasNewValue(scannedIface.getIpHostName(), getIpHostName())) {

@@ -58,6 +58,22 @@ public abstract class CriteriaValueConverters {
         }
     };
 
+    public static final Function<String,Character> CHARACTER_CONVERTER = new Function<String,Character>() {
+        @Override
+        public Character apply(final String t) {
+            return t.charAt(0);
+        }
+
+        /**
+         * Override {@link #toString()} on this functional interface
+         * to make it identifiable inside a debugger.
+         */
+        @Override
+        public String toString() {
+            return "CHARACTER_CONVERTER";
+        }
+    };
+
     public static final Function<String,Float> FLOAT_CONVERTER = new Function<String,Float>() {
         @Override
         public Float apply(String t) {

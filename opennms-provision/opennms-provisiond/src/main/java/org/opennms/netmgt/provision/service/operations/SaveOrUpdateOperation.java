@@ -111,7 +111,7 @@ public abstract class SaveOrUpdateOperation extends ImportOperation {
 
         m_currentInterface = new OnmsIpInterface(ipAddr, m_node);
         m_currentInterface.setIsManaged(status == 3 ? "U" : "M");
-        m_currentInterface.setIsSnmpPrimary(primaryType);
+        m_currentInterface.setPrimaryType(primaryType);
 
         if (addr != null && System.getProperty("org.opennms.provisiond.reverseResolveRequisitionIpInterfaceHostnames", "true").equalsIgnoreCase("true")) {
             m_currentInterface.setIpHostName(getProvisionService().getHostnameResolver().getHostname(addr, m_node.getLocation().getLocationName()));

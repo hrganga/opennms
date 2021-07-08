@@ -1218,7 +1218,7 @@ public class OnmsNode extends OnmsEntity implements Serializable, Comparable<Onm
     public OnmsIpInterface getPrimaryInterface() {
         List<OnmsIpInterface> primaryInterfaces = new ArrayList<>();
         for(OnmsIpInterface iface : getIpInterfaces()) {
-            if (PrimaryType.PRIMARY.equals(iface.getIsSnmpPrimary())) {
+            if (PrimaryType.PRIMARY.equals(iface.getPrimaryType())) {
                 primaryInterfaces.add(iface);
             }
         }
@@ -1499,7 +1499,7 @@ public class OnmsNode extends OnmsEntity implements Serializable, Comparable<Onm
             if(scannedPrimaryIf == null && iface.isPrimary()){
                 scannedPrimaryIf = iface;
             }else if(iface.isPrimary()){
-                iface.setIsSnmpPrimary(PrimaryType.SECONDARY);
+                iface.setPrimaryType(PrimaryType.SECONDARY);
             }
 
             ipInterfaceMap.put(iface.getIpAddress(), iface);
@@ -1517,7 +1517,7 @@ public class OnmsNode extends OnmsEntity implements Serializable, Comparable<Onm
                     it.remove();
                     dbIface.visit(new DeleteEventVisitor(eventForwarder));
                 }else if(scannedPrimaryIf != null && dbIface.isPrimary()){
-                    dbIface.setIsSnmpPrimary(PrimaryType.SECONDARY);
+                    dbIface.setPrimaryType(PrimaryType.SECONDARY);
                     oldPrimaryInterface = dbIface;
 
                 }
@@ -1525,7 +1525,7 @@ public class OnmsNode extends OnmsEntity implements Serializable, Comparable<Onm
                 // else update the database with scanned info
                 dbIface.mergeInterface(scannedIface, eventForwarder, deleteMissing);
                 if(scannedPrimaryIf != null && dbIface.isPrimary() && scannedPrimaryIf != scannedIface){
-                    dbIface.setIsSnmpPrimary(PrimaryType.SECONDARY);
+                    dbIface.setPrimaryType(PrimaryType.SECONDARY);
                     oldPrimaryInterface = dbIface;
                 }
             }

@@ -97,6 +97,8 @@ public class NodeRestServiceIT extends AbstractSpringJerseyRestTestCase {
         LOG.warn(sendRequest(GET, url, parseParamData("_s=assetRecord.id==2"), 200));
         LOG.warn(sendRequest(GET, url, parseParamData("_s=node.label==*2;assetRecord.id==2"), 200));
         LOG.warn(sendRequest(GET, url, parseParamData("_s=(node.label==*2;assetRecord.id==2),(node.label==*1)"), 200));
+        LOG.warn(sendRequest(GET, url, parseParamData("_s=ipInterface.ipAddress==10.10.10.10"), 204));
+        LOG.warn(sendRequest(GET, url, parseParamData("_s=ipInterface.isSnmpPrimary==P"), 204));
 
         // Use "Hello, Handsome" as a value to test CXF 'search.decode.values' property which will
         // URL-decode FIQL search values

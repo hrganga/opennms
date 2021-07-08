@@ -42,7 +42,6 @@ import org.opennms.core.utils.LocationUtils;
 import org.opennms.netmgt.dao.api.AbstractInterfaceToNodeCache;
 import org.opennms.netmgt.dao.api.InterfaceToNodeCache;
 import org.opennms.netmgt.dao.api.IpInterfaceDao;
-import org.opennms.netmgt.dao.api.MonitoringLocationDao;
 import org.opennms.netmgt.dao.api.NodeDao;
 import org.opennms.netmgt.model.OnmsIpInterface;
 import org.opennms.netmgt.model.OnmsNode;
@@ -119,11 +118,10 @@ public class InterfaceToNodeCacheDaoImpl extends AbstractInterfaceToNodeCache im
 
     private static class Value implements Comparable<Value> {
         private final int nodeId;
-        private final PrimaryType type;
+        private final char type;
 
 
-        private Value(final int nodeId,
-                      final PrimaryType type) {
+        private Value(final int nodeId, final char type) {
             this.nodeId = nodeId;
             this.type = type;
         }
@@ -132,7 +130,7 @@ public class InterfaceToNodeCacheDaoImpl extends AbstractInterfaceToNodeCache im
             return this.nodeId;
         }
 
-        public PrimaryType getType() {
+        public char getType() {
             return this.type;
         }
 
@@ -154,7 +152,7 @@ public class InterfaceToNodeCacheDaoImpl extends AbstractInterfaceToNodeCache im
 
         @Override
         public int hashCode() {
-            return Objects.hash(this.nodeId, this.type.getCharCode());
+            return Objects.hash(this.nodeId, this.type);
         }
 
         @Override
@@ -306,9 +304,9 @@ public class InterfaceToNodeCacheDaoImpl extends AbstractInterfaceToNodeCache im
         m_lock.writeLock().lock();
         try {
             final Key key = new Key(location, address);
-            return m_managedAddresses.remove(key, new Value(nodeId, PrimaryType.PRIMARY)) ||
-                    m_managedAddresses.remove(key, new Value(nodeId, PrimaryType.SECONDARY)) ||
-                    m_managedAddresses.remove(key, new Value(nodeId, PrimaryType.NOT_ELIGIBLE));
+            return m_managedAddresses.remove(key, new Value(nodeId, PrimaryType.PRIMARY.getCharCode())) ||
+                    m_managedAddresses.remove(key, new Value(nodeId, PrimaryType.SECONDARY.getCharCode())) ||
+                    m_managedAddresses.remove(key, new Value(nodeId, PrimaryType.NOT_ELIGIBLE.getCharCode()));
         } finally {
             m_lock.writeLock().unlock();
         }
